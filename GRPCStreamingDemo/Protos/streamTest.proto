@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option csharp_namespace = "GRPC.Service.Protos";
+
+package Streampackage;
+
+service streamTest
+{
+	rpc ClientStream(stream GetUserRequest) returns (GetUsersListResponse);
+
+	rpc ServerStream(GetUsersListRequest) returns (stream GetUserResponse);
+}
+
+message GetUserRequest {
+	int32 id = 1;
+}
+message GetUserResponse {
+	int32 id = 1;
+	string name = 2;
+	int32 age = 3;
+	string email = 4;
+	string address = 5;
+}
+message GetUsersListRequest 
+{
+	int32 page_size = 1;
+	int32 page_number = 2;
+}
+message GetUsersListResponse {
+	repeated GetUserResponse user_list = 1;
+}
